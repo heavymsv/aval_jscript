@@ -7,16 +7,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>E-Blog: Posto a prova</title>
+    <title>E-Blog: Posto a prova - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=BenchNine&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-rounded {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 600,
+          'GRAD' 0,
+          'opsz' 48
+        }
+        </style>
 
 </head>
 
-<body>
+<body class="vh-100">
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg bg-secondary bg-gradient bg-opacity-50">
             <div class="container-fluid">
@@ -30,10 +40,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item" id="link1">
-                            <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+                            <a class="nav-link " href="index.jsp">Home</a>
                         </li>
                         <li class="nav-item" id="link2">
-                            <a class="nav-link" href="login.jsp">Login</a>
+                            <a class="nav-link active" aria-current="page" href="login.jsp">Login</a>
                         </li>
                         <li class="nav-item" id="link3">
                             <a class="nav-link" href="cadastro.jsp">Cadastro</a>
@@ -59,42 +69,32 @@
         </nav>
     </header>
 
-    <div class="container">
-        <h1 class="text-center mt-3">Novidades</h1>
-        <div id="conteudo">
+    <div class="container row h-75 align-items-center mx-auto">
+        <div class="d-flex justify-content-center">
+            <div class="card w-50">
+                <div class="card-header">
+                    <h3 class="text-center d-flex justify-content-center mb-1">Login <div class="my-1"><span class="material-symbols-rounded" class="my-1">
+                        login
+                        </span></div></h3>
+                </div>
+                <div class="card-body w-100 d-flex justify-content-center">
+                    <form action="" class="row my-5 justify-content-center" style="width: 80%;">
 
-
-            <div class="d-flex justify-content-center my-4 mx-2">
-                <div class="card w-100">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional
-                            content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                <label for="floatingInput">Email</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="floatingPassword" name="senha" placeholder="Senha" required minlength="8">
+                                <label for="floatingPassword">Senha</label>
+                            </div>
+                            <button class="btn btn-primary mb-2 mt-3 w-50 btn-large">
+                                <h5><strong>Logar</strong></h3>
+                            </button>
+                    </form>
                 </div>
             </div>
-
-
-
         </div>
-
-        <div class="d-flex justify-content-between my-4 mx-2">
-            <form action="index.jsp"><input type="hidden" name="direçao" value="-"><button
-                    class="btn big-btn  btn-secondary disabled" id="botaoAnterior">
-                    <h5 class="my-1">Anterior</h5>
-                </button></form>
-            <form action="index.jsp"><input type="hidden" name="direçao" value="+"><button
-                    class="btn big-btn btn-secondary " id="botaoProxima">
-                    <h5 class="my-1">Proxima<h5>
-                </button></form>
-        </div>
-
-
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
