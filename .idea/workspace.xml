@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da2c0653-5e42-4a62-92a2-0155b08cd206" name="Changes" comment="Front end em 80%, back end em 10%">
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/AnaliseSenha.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/AutenticadorDeSenhas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DaoUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DaoUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/logout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/logout.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="da2c0653-5e42-4a62-92a2-0155b08cd206" name="Changes" comment="Front end em 80%, back end em 30%" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +63,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667341645128</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Front end em 80%, back end em 30%">
+      <created>1667359068749</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667359068750</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -109,6 +108,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="inicio" />
     <MESSAGE value="Front end em 80%, back end em 10%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Front end em 80%, back end em 10%" />
+    <MESSAGE value="Front end em 80%, back end em 30%" />
+    <option name="LAST_COMMIT_MESSAGE" value="Front end em 80%, back end em 30%" />
   </component>
 </project>
