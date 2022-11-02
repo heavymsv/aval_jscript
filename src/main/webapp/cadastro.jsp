@@ -1,6 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%//@ page import="entidades.Produto" %>
 <%//@ page import="dao.DaoProduto" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.*" %>
+<%@ page import="dao.*" %>
+<%@ page import="utils.AutenticadorDeSenhas"%>
 <!doctype html>
 <html lang="en">
 
@@ -24,6 +28,11 @@
                 'opsz' 48
         }
     </style>
+    <script>
+        if(sessionStorage.getItem('usuario')){
+            window.location.href = 'index.jsp';
+        }
+    </script>
 </head>
 
 <body class="vh-100">
@@ -48,15 +57,8 @@
                         <li class="nav-item" id="link3">
                             <a class="nav-link active" aria-current="page" href="cadastro.jsp">Cadastro</a>
                         </li>
-                        <li class="nav-item" id="link4">
-                            <a class="nav-link" href="index.jsp">Olá <span id="apelidoUsuario"></span></a>
-                        </li>
-                        <li class="nav-item" id="link5">
-                            <a class="nav-link" href="moderador.jsp">Area do Moderador</a>
-                        </li>
-                        <li class="nav-item" id="link6">
-                            <a class="nav-link" href="logout.jsp">LogOut</a>
-                        </li>
+
+
                     </ul>
                     <div style="width:15px;">
 
@@ -69,6 +71,62 @@
         </nav>
     </header>
 
+    <%
+        String erro="";
+        String email = request.getParameter("email");
+        String apelido = request.getParameter("apelido");
+        String nome = request.getParameter("nome");
+        String senha = request.getParameter("senha1");
+        String repetirSenha = request.getParameter("senha2");
+
+
+
+
+        if(email!=null){
+            if(nome!=null){
+                if(nome.trim().length()<3){
+                    erro = "Campo Nome com menos que 3 caracteres!!";
+                }else{
+                    nome = nome.trim();
+                    if(apelido!=null){
+                        if(apelido.trim().length()<3){
+                            erro = "Campo Apelido de Usuário com menos que 3 caracteres!!";
+                        }else{
+                        apelido = apelido.trim();
+                            if(senha!=null){
+                                if(senha.trim().length()<8){
+                                    erro = "Campo Senha com menos que 8 caracteres!!";
+                                }else{
+                                    senha = senha.trim();
+                                    erro = AutenticadorDeSenhas.verificar(senha);
+                                    if(erro.equals("OK")){
+                                        if(repetirSenha!=null){
+                                            if(repetirSenha.trim().length()<8){
+                                                erro = "Campo Senha com menos que 8 caracteres!!";
+                                            }else{
+                                                repetirSenha=repetirSenha.trim();
+                                                if(senha.equals(repetirSenha)){
+                                                    Usuario usuario = new Usuario(email,senha,0,nome,apelido);
+                                                    erro = DaoUsuario.salvarUsuario(usuario);
+                                                }else{
+                                                    erro="Senhas são diferentes entre si!!";
+                                                }
+                                            }
+                                        }else{
+                                            erro = "Campo Repetir Senha com menos que 8 caracteres!!";
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    %>
+
     <div class="container row h-75 align-items-center mx-auto">
         <div class="d-flex justify-content-center">
             <div class="card w-75">
@@ -77,8 +135,10 @@
                         <span class="material-symbols-rounded" class="my-1">how_to_reg</span></div>
                     </h3>
                 </div>
+                <h4 class='text-center mt-2'><%out.write(erro);%></h4>
                 <div class="card-body w-100 d-flex justify-content-center">
-                    <form action="cadastro.jsp" class="row my-5 justify-content-center" style="width: 80%;">
+
+                    <form action="cadastro.jsp" method="" class="row mb-5 justify-content-center" style="width: 80%;">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" minlength="3"
                                 required>

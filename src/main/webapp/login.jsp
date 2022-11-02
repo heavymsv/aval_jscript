@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%//@ page import="entidades.Produto" %>
-<%//@ page import="dao.DaoProduto" %>
+<%@ page import="entidades.*" %>
+<%@ page import="dao.*" %>
 <!doctype html>
 <html lang="en">
 
@@ -23,8 +23,29 @@
           'opsz' 48
         }
         </style>
-
+        <script>
+            if(sessionStorage.getItem('usuario')){
+                window.location.href = 'index.jsp';
+            }
+        </script>
 </head>
+
+<%
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String erro = "";
+        if(email !=null && senha != null){
+           if(!email.trim().isEmpty()&&!senha.trim().isEmpty()){
+            if(DaoUsuario.autenticarUsuario(email, senha)){
+                Usuario usuario = DaoUsuario.getUsuario(email);
+                out.write("<script>sessionStorage.setItem('usuario','" + email + "')</script>");
+                response.sendRedirect("index.jsp");
+            }else{
+                erro = ((DaoUsuario.verificarErro(email).equals("OK"))?"Senha Incorreta!!":DaoUsuario.verificarErro(email));
+            }
+           }
+        }
+ %>
 
 <body class="vh-100">
     <header class="sticky-top">
@@ -48,15 +69,6 @@
                         <li class="nav-item" id="link3">
                             <a class="nav-link" href="cadastro.jsp">Cadastro</a>
                         </li>
-                        <li class="nav-item" id="link4">
-                            <a class="nav-link" href="index.jsp">Olá <span id="apelidoUsuario"></span></a>
-                        </li>
-                        <li class="nav-item" id="link5">
-                            <a class="nav-link" href="moderador.jsp">Area do Moderador</a>
-                        </li>
-                        <li class="nav-item" id="link6">
-                            <a class="nav-link" href="logout.jsp">LogOut</a>
-                        </li>
                     </ul>
                     <div style="width:15px;">
 
@@ -70,6 +82,7 @@
     </header>
 
     <div class="container row h-75 align-items-center mx-auto">
+
         <div class="d-flex justify-content-center">
             <div class="card w-50">
                 <div class="card-header">
@@ -77,16 +90,17 @@
                         login
                         </span></div></h3>
                 </div>
+                <h4 class="text-center mt-2 justify-content-center" id="idErro"><%out.write(erro);%></h4>
                 <div class="card-body w-100 d-flex justify-content-center">
-                    <form action="" class="row my-5 justify-content-center" style="width: 80%;">
+                    <form action="login.jsp" method="get" class="row mb-5 justify-content-center" style="width: 80%;">
 
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                                <label for="floatingInput">Email</label>
+                                <label for="email">Email</label>
                             </div>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" name="senha" placeholder="Senha" required minlength="8">
-                                <label for="floatingPassword">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required minlength="8">
+                                <label for="senha">Senha</label>
                             </div>
                             <button class="btn btn-primary mb-2 mt-3 w-50 btn-large">
                                 <h5><strong>Logar</strong></h3>

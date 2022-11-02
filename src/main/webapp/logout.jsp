@@ -3,6 +3,5 @@
 <%//@ page import="dao.DaoProduto" %>
 
 <%
-    out.write("<script>sessionStorage.removeItem('chave')</script>");
-    response.sendRedirect("index.jsp");
+    out.write("<script>sessionStorage.removeItem('usuario');window.location.href = 'index.jsp';</script>");
 %>

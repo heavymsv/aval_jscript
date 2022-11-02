@@ -10,9 +10,9 @@ import java.sql.SQLException;
 
 public class DaoUsuario {
 
-    public static String salvar(Usuario usuario) {
+    public static String salvarUsuario(Usuario usuario) {
         Connection con = Conexao.conectar();
-        String sql = "insert into usuario(email,senha,nome,apelido) values (?,?,?,?);";
+        String sql = "insert into usuarios(email,senha,nome,apelido) values (?,?,?,?);";
         if (con == null) {
 
             return "Problema de conexão ao Banco de Dados";
@@ -30,15 +30,16 @@ public class DaoUsuario {
             ps.execute();
 
         } catch (SQLException e) {
-            return "Falha de Gravação no Banco";
+            String retorno = verificarErro(usuario);
+            return retorno.equals("OK")?"Nenhum erro evidenciado claramente, tente novamente":retorno;
         }
 
-        return "Sucesso";
+        return "Usuário registrado com Sucesso!";
     }
 
-    public static boolean autenticar(String usuario, String senha){
+    public static boolean autenticarUsuario(String usuario, String senha){
         Connection con = Conexao.conectar();
-        String sql = "select * from usuario where email = ? and senha = ?;";
+        String sql = "select * from usuarios where email = ? and senha = ?;";
         if (con == null) {
 
             return false;
@@ -72,11 +73,11 @@ public class DaoUsuario {
 
     public static Usuario fullGetUsuario(String usuario){
         Connection con = Conexao.conectar();
-        Usuario saida = null;
-        String sql = "select * from usuario where email = ? ;";
+        Usuario saida = new Usuario();
+        String sql = "select * from usuarios where email = ? ;";
         if (con == null) {
 
-            return saida;
+            return null;
 
         }
 
@@ -102,5 +103,143 @@ public class DaoUsuario {
         }
 
         return saida;
+    }
+
+    public static void deletarUsuario(String email){
+
+        Connection con = Conexao.conectar();
+        String sql = "delete from usuarios where email = ? ;";
+        if (con == null) {
+            System.out.println("Falha de conexão");
+            return;
+
+        }
+
+        PreparedStatement ps;
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1,email);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                System.out.println(rs.toString());
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro de deleção");
+        }
+
+    }
+
+    public static String modificarUsuario(Usuario usuario, String email){
+        Connection con = Conexao.conectar();
+        String sql = "insert into usuarios(email,senha,nome,apelido) values (?,?,?,?) where email = ?;";
+        if (con == null) {
+
+            return "Problema de conexão ao Banco de Dados";
+
+        }
+        PreparedStatement ps;
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1,usuario.getEmail());
+            ps.setString(2,usuario.getSenha());
+            ps.setString(3,usuario.getNome());
+            ps.setString(4,usuario.getApelido());
+            ps.setString(5,email);
+            ps.execute();
+
+        } catch (SQLException e) {
+            String retorno = verificarErro(usuario);
+            if(retorno.equals("Email já em uso!!")&&
+            !usuario.getEmail().equals(email)){
+                return retorno;
+            }
+            usuario.setEmail(email);
+            retorno = verificarErro(usuario);
+            if(retorno.equals("Email já em uso!!")){
+                return "Nenhum erro Detectado, Tente novamente maios tarde!!";
+            }
+            return retorno;
+        }
+
+        return "Sucesso";
+    }
+
+    public static String verificarErro(Usuario usuario){
+        Connection con = Conexao.conectar();
+        String sql = "select * from usuarios where email = ? ;";
+        if (con == null) {
+
+            return "Erro de conexão ao Banco de dados";
+
+        }
+
+        PreparedStatement ps;
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1,usuario.getEmail());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                return "Email já em uso!!";
+            }
+
+        } catch (SQLException e) {
+            return "Erro de contato com o Banco de Dados!";
+        }
+
+        sql = "select * from usuarios where apelido = ? ;";
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1,usuario.getApelido());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                return "Nome de Usuário já em uso";
+            }
+
+        } catch (SQLException e) {
+            return "Erro de contato com o Banco de Dados!";
+        }
+
+        return "OK";
+    }
+
+    public static String verificarErro(String usuario){
+        Connection con = Conexao.conectar();
+        Usuario saida = null;
+        String sql = "select * from usuarios where email = ? ;";
+        if (con == null) {
+
+            return "Erro de conexão ao Banco de dados";
+
+        }
+
+        PreparedStatement ps;
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1,usuario);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                return "OK";
+            }
+
+        } catch (SQLException e) {
+            return "Erro de conexão ao Banco de Dados!";
+        }
+
+        return "Email não cadastrado!!";
     }
 }
