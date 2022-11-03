@@ -1,0 +1,7 @@
+"id";"texto";"aprovado";"postagem_id";"usuario_email";"data"
+1;"Este é exemplo de um comentário feito com privilégio de administrador";1;3;"admin@sys";"2022-11-03 06:08:31"
+2;"Este também e só esta sendo usado pra provar o funcionamento de tal múltiplo uso de comentários.";1;2;"admin@sys";"2022-11-03 06:09:12"
+3;"Este é um comentário de um usuário comum, porém oi autorizado via plataforma.";1;3;"example@etc";"2022-11-03 06:10:21"
+4;"Aqui temos um comentário que pode ser escolhido mantido";0;1;"example@etc";"2022-11-03 06:10:51"
+5;"e outro que talvez não...";0;1;"example@etc";"2022-11-03 06:11:03"
+6;"E aqui é somente pra exemplificar o usuário comum de outro Login.";0;1;"user@tech";"2022-11-03 06:11:54"
