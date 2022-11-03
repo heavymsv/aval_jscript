@@ -1,10 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%//@ page import="entidades.Produto" %>
-<%//@ page import="dao.DaoProduto" %>
+
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entidades.*" %>
 <%@ page import="dao.*" %>
 <%@ page import="utils.*"%>
+<%@ page import="java.sql.Timestamp" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.time.format.DateTimeFormatter"%>
 
 <!doctype html>
 <html lang="en">
@@ -12,46 +16,36 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>E-Blog: Posto a prova</title>
+    <title>E-Blog: Posto a prova - Bem vindo Moderador</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=BenchNine&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-rounded {
+            font-variation-settings:
+                'FILL' 1,
+                'wght' 600,
+                'GRAD' 0,
+                'opsz' 48
+        }
+    </style>
 </head>
 
 <%
     String email = request.getParameter("usuario");
-    String titulo = request.getParameter("titulo");
-    String texto = request.getParameter("texto");
-    String erro = "";
-
     if(email == null){
         response.sendRedirect("index.jsp");
     }
     if(DaoUsuario.getUsuario(email).getNivel()<1){
         response.sendRedirect("index.jsp");
     }
-
-    if(titulo != null){
-        if(titulo.trim().length() < 3){
-            erro = "o Tamanho Mínimo do Titulo é de 3 Caracteres!!";
-        }else{
-            if(texto != null){
-                if(texto.trim().length() < 15){
-                    erro = "o Tamanho Mínimo do Post é de 10 Caracteres!!";
-                }else{
-                    erro = DaoPostagem.salvarPostagem(titulo, texto, email);
-                }
-            }
-        }
-    }
-
 %>
 
-<body style="height:95vh">
-
+<body class="vh-100">
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg bg-secondary bg-gradient bg-opacity-50">
             <div class="container-fluid">
@@ -87,43 +81,39 @@
             </div>
         </nav>
     </header>
-    <div class='row my-2'>
-        <h4 class='text-center' style='margin:auto;'><%out.write(erro);%></h4>
-    </div>
+
+    <h1 class="text-center">Comentários em revisão</h1>
+
+    <div class='container w-75 mt-5 pb-2' style='margin:auto'>
     <form></form>
-    <div class="container h-100">
-        <h1 class="text-center mt-3">Postagem</h1>
 
-        <div class="d-flex justify-content-center my-4 mx-2 ">
-            <div class="card w-100">
-                <div class="card-header">
-                    <h4>Criar Nova Postagem</h4>
-                </div>
+    <%
+        ArrayList<Comentario> comentarios = DaoComentario.getComentarios(DaoComentario.metodoBusca.SOMENTE_N_APROVADOS);
 
-                <div class="card-body  overflow-auto">
-                    <form action="novaPostagem.jsp" method = "POST" id="formularioPostagem" >
-                        <input type = 'hidden' value ='<% out.write(email); %>' name='usuario'>
-                        <div class="form-floating mb-3">
-                            <input type="text" name="titulo" class="form-control form-control-lg" id="floatingInput" placeholder="Titulo" required minlength="3">
-                            <label for="floatingInput">Titulo</label>
-                        </div>
-                        <div class="form-floating mb-3" style="height:50vh">
-                            <textarea name="texto" form="formularioPostagem" class="form-control h-100" id="floatingText" placeholder="name@example.com" required minlength="15"></textarea>
-                            <label for="floatingText">Postagem</label>
-                        </div>
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
 
-                        <div class="d-flex justify-content-between mx-2 mb-2">
-                            <button class="btn big-btn me-1 btn-secondary" id="botaoAnterior">
-                            <h5 class="my-1">Salvar</h5>
-                            <button type="button" onclick="document.getElementById('formularioPostagem').reset()" class="btn big-btn btn-primary" id="botaoAnterior">
-                            <h5 class="my-1">Limpar Tudo</h5>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        for(Comentario c:comentarios){
 
+            out.write("<div class='card mb-4'>" +
+                "<div class='card-header'>" +
+                    "Da postagem de título: " + c.getPostagem().getTitulo() +
+                "</div>" +
+                "<div class='card-body'>" +
+                    "<h5 class='card-title'>" + c.getTexto() + "</h5>" +
+                    "<p class='card-text'>" + c.getUsuario().getApelido() +  " em " + formatter.format(c.getData().toLocalDateTime()) + " às " + formatter2.format(c.getData().toLocalDateTime()) + "</p>" +
+                    "<div class='d-flex justify-content-between w-75' style='margin:auto;'>" +
+                        "<form action='resolverComentario.jsp' method='POST'><input type='hidden' name='usuario' value = '" + email + "'><input type='hidden' name='idComentario' value = '" + c.getId()  + "'><input type='hidden' name = 'aceito' value = '1'><button " +
+                                "class='btn btn-primary'>Aceitar</button></form>" +
+                        "<form action='resolverComentario.jsp' method='POST'><input type='hidden' name='usuario' value = '" + email + "'><input type='hidden' name='idComentario' value = '" + c.getId() + "'><input type='hidden' name = 'aceito' value = '0'><button " +
+                                "class='btn btn-danger'>Recusar</button></form>" +
+                    "</div>" +
+                "</div>" +
+            "</div>");
 
+        }
+
+    %>
 
     </div>
 

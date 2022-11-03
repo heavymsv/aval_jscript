@@ -112,6 +112,58 @@
 
     </div>
 
+    <h2 class="mt-4 mb-2 text-center">Escreva seu comentário</h2>
+
+    <div class="card mt-4 mb-2 w-75" style="margin:auto" id="informacaoLoginMain">
+        <div class="card-body" id="informacaoLogin">
+        <form action="novoComentario.jsp" method="GET">
+            <input type="hidden" name="idPostagem" value='<%out.write(""+postagem.getId());%>'>
+            <input type="hidden" name="usuario" id="identificacaoUsuario">
+            <div class="form-floating mb-3" style="height:40vh">
+                <textarea class="form-control h-100" id="texto" placeholder="Deixe seu Comentario" name="texto" minlength="10" required></textarea>
+                <label for="texto">Deixe seu Comentario</label>
+            </div>
+            <button class="btn btn-primary">Comentar</button>
+
+        </form>
+        </div>
+    </div>
+
+
+
+    <h2 class="mt-4 mb-2 text-center">Comentarios</h2>
+    <div class="container w-50" style="margin:auto">
+
+        <%
+        ArrayList<Comentario> comentarios = DaoComentario.getComentarios(postagem);
+
+        for(Comentario c:comentarios){
+            out.write("<div class= 'card my-3'>" + "<div class= 'card-body'>" + "<h4>" + c.getUsuario().getApelido() +  " em " + formatter.format(c.getData().toLocalDateTime()) + " às " + formatter2.format(c.getData().toLocalDateTime()) + "</h4>" +
+                    "<p>" + c.getTexto() + "</p>" +
+                    "</div>" +
+                "</div>"
+            );
+        }
+        %>
+
+
+
+    </div>
+
+
+    <script>
+            if(sessionStorage.getItem('usuario')){
+                document.getElementById("identificacaoUsuario").value = JSON.parse(sessionStorage.getItem('usuario')).email;
+            }else{
+                document.getElementById("informacaoLogin").remove()
+                console.log(document.getElementById("informacaoLoginMain"))
+                var link = document.createElement('a')
+                link.setAttribute('href','login.jsp')
+                link.setAttribute('class','text-center')
+                link.innerHTML = "Para comentar faça Login"
+                document.getElementById("informacaoLoginMain").appendChild(link);
+            }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>

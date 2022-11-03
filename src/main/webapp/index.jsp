@@ -123,7 +123,7 @@
                         "</div>" +
                         "<div class='card-body'>" +
                             "<h5 class='card-title'>" + p.getTitulo() + "</h5>" +
-                            "<p class='card-text'>" + p.getTexto().substring(0,11) + "...</p>" +
+                            "<p class='card-text'>" + p.getTexto().substring(0,16) + "...</p>" +
                             "<form action='postagem.jsp'><input type='hidden' name='idPostagem' value = '" + p.getId() + "'><button class='btn btn-primary'>Ler Mais</button></form>"+
                         "</div>"+
                     "</div>"+

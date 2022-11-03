@@ -96,7 +96,7 @@
                         <button class="btn btn-primary">Criar Nova</button>
                  </form>
 
-                <form action="escolherPostagem.jsp" >
+                <form action="escolherPostagem.jsp" method="POST">
                     <input type="hidden" value='<%out.write(email);%>' name="usuario">
                     <button class="btn btn-primary">Gerenciar</button>
                 </form>
@@ -114,7 +114,7 @@
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <div class="d-flex justify-content-evenly">
-                <form action=""><input type="hidden" value='<%out.write(email);%>' name="usuario"><button class="btn btn-success">Revisar Comentários</button></form>
+                <form action="revisarComentarios.jsp" method="POST"><input type="hidden" value='<%out.write(email);%>' name="usuario"><button class="btn btn-success">Revisar Comentários</button></form>
               </div>
             </div>
           </div>

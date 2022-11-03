@@ -4,20 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da2c0653-5e42-4a62-92a2-0155b08cd206" name="Changes" comment="Front end em 80%, back end em 30%">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dao/DaoPostagem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/deletarPostagem.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/editarPostagem.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/escolherPostagem.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/novaPostagem.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/postagem.jsp" afterDir="false" />
+    <list default="true" id="da2c0653-5e42-4a62-92a2-0155b08cd206" name="Changes" comment="Front end em 95%(falta apenas adição de comentarios), back end em 85%(finalizado usuarios e postagens)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dao/DaoComentario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/novoComentario.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resolverComentario.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/revisarComentarios.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entidades/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entidades/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DaoPostagem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DaoPostagem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DaoUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DaoUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entidades/Comentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entidades/Comentario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/editarPostagem.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/editarPostagem.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/logout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/logout.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/moderador.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/moderador.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/novaPostagem.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/novaPostagem.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/postagem.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/postagem.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667400037834</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Front end em 95%(falta apenas adição de comentarios), back end em 85%(finalizado usuarios e postagens)">
+      <created>1667446417779</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667446417779</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,6 +137,7 @@
     <MESSAGE value="inicio" />
     <MESSAGE value="Front end em 80%, back end em 10%" />
     <MESSAGE value="Front end em 80%, back end em 30%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Front end em 80%, back end em 30%" />
+    <MESSAGE value="Front end em 95%(falta apenas adição de comentarios), back end em 85%(finalizado usuarios e postagens)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Front end em 95%(falta apenas adição de comentarios), back end em 85%(finalizado usuarios e postagens)" />
   </component>
 </project>

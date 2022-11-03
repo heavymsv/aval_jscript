@@ -22,6 +22,13 @@ public class Comentario {
         this.data = data;
     }
 
+    public Comentario(String texto, int aprovado, Postagem postagem, Usuario usuario){
+        this.texto = texto;
+        this.aprovado = aprovado;
+        this.postagem = postagem;
+        this.usuario = usuario;
+    }
+
     public int getId() {
         return id;
     }

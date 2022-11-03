@@ -175,7 +175,7 @@ public class DaoPostagem {
 
     public static void deletarPostagem(int id){
         Connection con = Conexao.conectar();
-        String sql = "delete from postagens where id = ? ;";
+        String sql = "delete from comentarios where postagem_id = ? ;delete from postagens where id = ? ;";
         if (con == null) {
 
             return;
@@ -188,6 +188,7 @@ public class DaoPostagem {
 
                 ps = con.prepareStatement(sql);
                 ps.setInt(1,id);
+                ps.setInt(2,id);
 
                 ps.execute();
 

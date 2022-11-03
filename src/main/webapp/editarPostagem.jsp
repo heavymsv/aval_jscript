@@ -64,7 +64,7 @@
             erro = "o Tamanho Mínimo do Titulo é de 3 Caracteres!!";
         }else{
             if(texto != null){
-                if(texto.trim().length() < 10){
+                if(texto.trim().length() < 15){
                     erro = "o Tamanho Mínimo do Post é de 10 Caracteres!!";
                 }else{
                     postagem.setTexto(texto);
@@ -142,11 +142,11 @@
                         <input type="hidden" name="usuario" value='<%out.write(email);%>'>
                         <input type="hidden" name="idPostagem" value='<%out.write(idString);%>'>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-lg" id="titulo" name='titulo' value='<%out.write(postagem.getTitulo());%>' placeholder="name@example.com">
+                            <input type="text" class="form-control form-control-lg" id="titulo" name='titulo' value='<%out.write(postagem.getTitulo());%>' placeholder="name@example.com" minlength="3" required>
                             <label for="titulo">Titulo</label>
                         </div>
                         <div class="form-floating mb-3" style="height:50vh">
-                            <textarea class="form-control h-100" id="texto" name='texto' placeholder="name@example.com"><%out.write(postagem.getTexto());%></textarea>
+                            <textarea class="form-control h-100" id="texto" name='texto' placeholder="name@example.com" required minlength="15"><%out.write(postagem.getTexto());%></textarea>
                             <label for="texto">Postagem</label>
                         </div>
 

@@ -108,7 +108,7 @@ public class DaoUsuario {
     public static void deletarUsuario(String email){
 
         Connection con = Conexao.conectar();
-        String sql = "delete from usuarios where email = ? ;";
+        String sql = "delete from comentarios where usuario_email = ? ;delete from postagens where usuario_email = ? ;delete from usuarios where email = ? ;";
         if (con == null) {
             System.out.println("Falha de conexão");
             return;
@@ -121,6 +121,8 @@ public class DaoUsuario {
 
             ps = con.prepareStatement(sql);
             ps.setString(1,email);
+            ps.setString(2,email);
+            ps.setString(3,email);
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
