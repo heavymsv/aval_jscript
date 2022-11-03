@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da2c0653-5e42-4a62-92a2-0155b08cd206" name="Changes" comment="Front end em 80%, back end em 30%" />
+    <list default="true" id="da2c0653-5e42-4a62-92a2-0155b08cd206" name="Changes" comment="Front end em 80%, back end em 30%">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dao/DaoPostagem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/deletarPostagem.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/editarPostagem.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/escolherPostagem.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/novaPostagem.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/postagem.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entidades/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entidades/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/logout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/logout.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/moderador.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/moderador.jsp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667359068750</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Front end em 80%, back end em 30%">
+      <created>1667400037834</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667400037834</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

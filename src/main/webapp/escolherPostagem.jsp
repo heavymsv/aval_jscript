@@ -6,31 +6,35 @@
 <%@ page import="dao.*" %>
 <%@ page import="utils.*"%>
 
+<%@ page import="java.sql.Timestamp" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.time.format.DateTimeFormatter"%>
 
 <!doctype html>
 <html lang="en">
 
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>E-Blog: Posto a prova - Bem vindo Moderador</title>
+    <title>E-Blog: Posto a prova</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=BenchNine&display=swap" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         .material-symbols-rounded {
-            font-variation-settings:
-                'FILL' 1,
-                'wght' 600,
-                'GRAD' 0,
-                'opsz' 48
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 600,
+          'GRAD' 0,
+          'opsz' 48
         }
     </style>
+
 </head>
 
 <%
@@ -43,7 +47,8 @@
     }
 %>
 
-<body class="vh-100">
+<body style="height:95vh">
+
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg bg-secondary bg-gradient bg-opacity-50">
             <div class="container-fluid">
@@ -79,47 +84,50 @@
             </div>
         </nav>
     </header>
-    <div class="accordion container my-5" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Postagens
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <div class="d-flex justify-content-evenly">
-                <form></form>
+    <form action=""></form>
 
-                 <form action = "novaPostagem.jsp" method="POST">
-                        <input type="hidden" value='<%out.write(email);%>' name="usuario">
-                        <button class="btn btn-primary">Criar Nova</button>
-                 </form>
+    <div class="container h-100">
+        <h1 class="text-center mt-3">Modificar Postagem</h1>
 
-                <form action="escolherPostagem.jsp" >
-                    <input type="hidden" value='<%out.write(email);%>' name="usuario">
-                    <button class="btn btn-primary">Gerenciar</button>
-                </form>
+        <div class="d-flex justify-content-center my-4 mx-2 ">
+            <div class="table-responsive-sm overflow-auto">
+                <table class="table table-secondary table-striped-columns">
+                    <thead>
+                        <tr>
+                          <th scope="col">Autor</th>
+                          <th scope="col">Data</th>
+                          <th scope="col" colspan="2">Titulo</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%
+                            ArrayList<Postagem> postagens = DaoPostagem.getListaPostagens(-1,0);
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
 
-              </div>
+                            for(Postagem postagem:postagens){
+
+                                out.write("<tr>"+
+                                  "<th scope='row'>" + postagem.getUsuario().getApelido() + "</th>"+
+                                  "<td>" + formatter.format(postagem.getData().toLocalDateTime()) + " às " + formatter2.format(postagem.getData().toLocalDateTime()) + "</td>"+
+                                  "<td colspan='2' class='text-wrap'><form action='editarPostagem.jsp'><input type='hidden' name='idPostagem' value='" + postagem.getId() + "'><input type='hidden' name='usuario' value='" + email + "'><button class='btn btn-link'>" + postagem.getTitulo() + "</button></form></td>"+
+                                "</tr>");
+
+                            }
+                        %>
+
+                      </tbody>
+                </table>
             </div>
-          </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Comentários
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <div class="d-flex justify-content-evenly">
-                <form action=""><input type="hidden" value='<%out.write(email);%>' name="usuario"><button class="btn btn-success">Revisar Comentários</button></form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
+
+    <script>
+        function resetarForm(){
+            var doc = document.getElementsByTagName('form')
+            console.log(doc);
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
@@ -127,3 +135,5 @@
 </body>
 
 </html>
+
+

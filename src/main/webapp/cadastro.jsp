@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entidades.*" %>
 <%@ page import="dao.*" %>
-<%@ page import="utils.AutenticadorDeSenhas"%>
+<%@ page import="utils.*"%>
 <!doctype html>
 <html lang="en">
 
@@ -145,7 +145,7 @@
                             <label for="floatingInput">Nome</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="nome" name="apelido" placeholder="Apelido de Usuário" minlength="3"
+                            <input type="text" class="form-control" id="apelido" name="apelido" placeholder="Apelido de Usuário" minlength="3"
                                 required>
                             <label for="floatingInput">Apelido de Usuário</label>
                         </div>
@@ -160,7 +160,7 @@
                             <label for="floatingPassword">Senha</label>
                         </div>
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword" name="senha2"
+                            <input type="password" class="form-control" id="floatingPassword2" name="senha2"
                                 placeholder="Senha" required minlength="8">
                             <label for="floatingPassword">Repetir Senha</label>
                         </div>

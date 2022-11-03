@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entidades.*" %>
 <%@ page import="dao.*" %>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -38,8 +40,10 @@
            if(!email.trim().isEmpty()&&!senha.trim().isEmpty()){
             if(DaoUsuario.autenticarUsuario(email, senha)){
                 Usuario usuario = DaoUsuario.getUsuario(email);
-                out.write("<script>sessionStorage.setItem('usuario','" + email + "')</script>");
-                response.sendRedirect("index.jsp");
+                if(usuario.getNivel()>0){
+                    out.write("<script>sessionStorage.setItem('moderador','true');</script>");
+                }
+                out.write("<script>sessionStorage.setItem('usuario','" + usuario.toString() + "');window.location.href = 'index.jsp';</script>");
             }else{
                 erro = ((DaoUsuario.verificarErro(email).equals("OK"))?"Senha Incorreta!!":DaoUsuario.verificarErro(email));
             }

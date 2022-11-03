@@ -45,13 +45,12 @@
                             if (sessionStorage.getItem('usuario')) {
                                 document.getElementById('conteudoNav').innerHTML +=
                                     '<li class="nav-item" id="link4">' +
-                                    '<a class="nav-link" href="index.jsp">Olá <span id = "apelidoUsuario"></span></a>' +
+                                    '<a class="nav-link" href="index.jsp">Olá <span id="apelidoUsuario">'+ JSON.parse(sessionStorage.getItem('usuario')).apelido +'</span></a>' +
                                     '</li>';
-                                document.getElementById('apelidoUsuario').innerHTML = (JSON.parse(sessionStorage.getItem('usuario'))).apelido;
                                 if (sessionStorage.getItem('moderador')) {
                                     document.getElementById('conteudoNav').innerHTML +=
                                         '<li class="nav-item" id="link5">' +
-                                        '<form action = "moderador.jsp" method = "post"><input name="usuario" type="hidden" value="' + (JSON.parse(sessionStorage.getItem('usuario'))).email + '" id="areaModerador"></input><button class="btn btn-link nav-link">Area do Moderador</a>'+
+                                        '<a class="nav-link" href="moderador.jsp">Area do Moderador</a>' +
                                         '</li>';
                                 }
                                 document.getElementById('conteudoNav').innerHTML +=
@@ -67,6 +66,8 @@
                                     '</li>'
                             }
                         </script>
+
+
                     </ul>
                     <div style="width:15px;">
 
@@ -79,88 +80,33 @@
         </nav>
     </header>
 
+    <%
+        String idString = request.getParameter("idPostagem");
+        if(idString==null){
+            response.sendRedirect("index.jsp");
+        }
+        int id = Integer.parseInt(idString);
+        Postagem postagem = DaoPostagem.getPostagem(id);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+    %>
+
     <div class="container">
-        <h1 class="text-center mt-3">Novidades</h1>
-        <div id="conteudo">
-            <%
-            String value = request.getParameter("start");
-            String direction = request.getParameter("dir");
-            int valor;
-            int dir;
-            int[] limPagina = {0,0};
-            int[] lim = DaoPostagem.getTamanhoBanco();
-            if(value==null){
-                valor = 0;
-                dir = 1;
-            }
-            else{
-                valor = Integer.parseInt(value);
-                dir = Integer.parseInt(direction);
-            }
-
-            ArrayList<Postagem> postagens = DaoPostagem.getListaPostagens(valor, dir);
-            //String postagens = DaoPostagem.getListaPostagens(0, 1);
-
-            //out.write(postagens);
-
-            boolean first = true;
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
-
-             for(Postagem p:postagens){
-                if(first){
-                    limPagina[0] = p.getId();
-                    first=false;
-                }
-                limPagina[1] = p.getId();
-
-                out.write(
-                "<div class='d-flex justify-content-center my-4 mx-2'>" +
-                    "<div class='card w-100'>" +
-                        "<div class='card-header'>" +
-                            formatter.format(p.getData().toLocalDateTime()) + " às " + formatter2.format(p.getData().toLocalDateTime()) +
-                        "</div>" +
-                        "<div class='card-body'>" +
-                            "<h5 class='card-title'>" + p.getTitulo() + "</h5>" +
-                            "<p class='card-text'>" + p.getTexto().substring(0,11) + "...</p>" +
-                            "<form action='postagem.jsp'><input type='hidden' name='idPostagem' value = '" + p.getId() + "'><button class='btn btn-primary'>Ler Mais</button></form>"+
-                        "</div>"+
-                    "</div>"+
-                "</div>"
-                );
-
-            }
-
-            String proxima = "";
-            String anterior = "";
-
-            if(limPagina[1]==lim[1]){
-                proxima = "disabled";
-            }
-
-            if(limPagina[0]==lim[0]){
-                anterior = "disabled";
-            }
-
-            %>
-
-
-
+        <p style="font-size:300%;font-weight:600;" class="text-center mt-3"><%out.write(postagem.getTitulo());%></p>
+        <br>
+        <div class="row w-75" style="margin:auto">
+            <p style="font-size:150%;color:grey;"><i>Escrito por <span id="apelidoAutor"><%out.write(postagem.getUsuario().getApelido());%></span> em <span id="horario"><%out.write(formatter.format(postagem.getData().toLocalDateTime()) + " às " + formatter2.format(postagem.getData().toLocalDateTime()));%></span><i></p>
         </div>
 
-        <div class="d-flex justify-content-between my-4 mx-2">
-            <form action="index.jsp"><input type="hidden" name="dir" value="1">
-                <input type="hidden" name="start" value='<%out.write(""+limPagina[0]);%>'><button
-                    class='btn big-btn  btn-secondary <%out.write(anterior);%>' id="botaoAnterior">
-                    <h5 class="my-1">Anterior</h5>
-                </button></form>
-            <form action="index.jsp"><input type="hidden" name="dir" value="-1">
-                <input type="hidden" name="start" value='<%out.write(""+limPagina[1]);%>'><button
-                    class='btn big-btn btn-secondary <%out.write(proxima);%>' id="botaoProxima">
-                    <h5 class="my-1">Proxima<h5>
-                </button></form>
+        <br>
+
+        <div class="row overflow-auto" style="width:90%;margin:auto">
+            <p style="font-size:120%"><%out.write(postagem.getTexto());%></p>
         </div>
+
+
+
 
 
 

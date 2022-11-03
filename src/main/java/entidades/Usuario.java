@@ -61,4 +61,11 @@ public class Usuario {
     public void setApelido(String apelido) {
         this.apelido = apelido;
     }
+
+    @Override
+    public String toString() {
+        String saida = "{\"email\":\"" + getEmail() + "\",\"apelido\":\""+ getApelido() +"\" }";
+        return saida;
+    }
+
 }
